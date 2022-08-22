@@ -17,28 +17,25 @@ class Translator {
         if (locale === 'american-to-british') {
 
             for (let i of Object.keys(americanOnly)) {
-                let re3 = new RegExp(i, 'ig'),
+                let re3 = new RegExp(i, 'ig'), //TODO '^' + i + '\\s?$'
                     x = re3.exec(translated);
 
-                if (x !== null) {
-                    console.log('testing -------- ', x);
-                    translated = translated.replace(re3, `${span1}${americanOnly[i]}${span2}`);
-                }
+                if (x) translated = translated.replace(re3, `${span1}${americanOnly[i]}${span2}`);
 
             }
 
             for (let i of Object.keys(americanToBritishSpelling)) {
-                if (translated.includes(i)) {
-                    let re3 = new RegExp(i, 'ig');
-                    translated = translated.replace(re3, `${span1}${americanToBritishSpelling[i]}${span2}`);
-                }
+                let re3 = new RegExp(i, 'ig'),
+                    x = re3.exec(translated);                    
+                    
+                if (x) translated = translated.replace(re3, `${span1}${americanToBritishSpelling[i]}${span2}`);
             }
 
             for (let i of Object.keys(americanToBritishTitles)) {
-                if (translated.includes(i)) {
-                    let re3 = new RegExp(i, 'ig');
-                    translated = translated.replace(re3, `${span1}${americanToBritishTitles[i]}${span2}`);
-                }
+                let re3 = new RegExp(i, 'ig'),
+                    x = re3.exec(translated);
+                    
+                if (x) translated = translated.replace(re3, `${span1}${americanToBritishTitles[i]}${span2}`);
             }
 
         } 
@@ -46,24 +43,24 @@ class Translator {
         if (locale === 'british-to-american') {
 
             for (let i of Object.keys(britishOnly)) {
-                if (translated.includes(i)) {
-                    let re3 = new RegExp(i, 'ig');
-                    translated = translated.replace(re3, `${span1}${britishOnly[i]}${span2}`);
-                }
+                let re3 = new RegExp(i, 'ig'),
+                    x = re3.exec(translated);
+                    
+                if (x) translated = translated.replace(re3, `${span1}${britishOnly[i]}${span2}`);
             }
 
             for (let i of Object.keys(americanToBritishSpelling)) {
-                if (translated.includes(americanToBritishSpelling[i])) {
-                    let re3 = new RegExp(americanToBritishSpelling[i], 'ig');
-                    translated = translated.replace(re3, `${span1}${i}${span2}`);
-                }
+                let re3 = new RegExp(americanToBritishSpelling[i], 'ig'),
+                    x = re3.exec(translated);
+                    
+                if (x) translated = translated.replace(re3, `${span1}${i}${span2}`);
             }
 
             for (let i of Object.keys(americanToBritishTitles)) {
-                if (translated.includes(americanToBritishTitles[i])) {
-                    let re3 = new RegExp(americanToBritishTitles[i], 'ig');
-                    translated = translated.replace(re3, `${span1}${i}${span2}`);
-                }
+                let re3 = new RegExp(americanToBritishTitles[i], 'ig'),
+                    x = re3.exec(translated);
+                    
+                if (x) translated = translated.replace(re3, `${span1}${i}${span2}`);
             }
 
         }
