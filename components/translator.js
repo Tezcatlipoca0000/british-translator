@@ -17,10 +17,14 @@ class Translator {
         if (locale === 'american-to-british') {
 
             for (let i of Object.keys(americanOnly)) {
-                if (translated.includes(i)) {
-                    let re3 = new RegExp(i, 'ig');
+                let re3 = new RegExp(i, 'ig'),
+                    x = re3.exec(translated);
+
+                if (x !== null) {
+                    console.log('testing -------- ', x);
                     translated = translated.replace(re3, `${span1}${americanOnly[i]}${span2}`);
                 }
+
             }
 
             for (let i of Object.keys(americanToBritishSpelling)) {
