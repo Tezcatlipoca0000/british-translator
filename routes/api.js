@@ -14,5 +14,6 @@ module.exports = function (app) {
           translated = translator.translate(text, locale);
 
     console.log('testing post /translate variables ', text, locale, translated);
+    res.json({'text': text, 'translation': translated});
     });
 };

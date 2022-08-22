@@ -65,6 +65,7 @@ class Translator {
         }
         
         console.log('testing translate func translated ', translated);
+        return translated;
         
     }
 
