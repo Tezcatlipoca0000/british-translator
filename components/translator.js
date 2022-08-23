@@ -6,13 +6,10 @@ const britishOnly = require('./british-only.js')
 class Translator {
 
     translate(text, locale) {
-        console.log('testing translate func arguments ', text, locale);
-        //console.log('testing translate func components ', americanOnly, americanToBritishSpelling, americanToBritishTitles, britishOnly);
+        //console.log('testing translate func arguments ', text, locale);
         let translated = text,
             span1 = '<span class="highlight">',
             span2 = '</span>',
-            //re1 = /\.|\?|!/; // TODO re1 to catch any punctuation 
-            // TODO re2 to catch dd.dd | dd:dd
             re2 = /\d\d:\d\d|\d\d\.\d\d/g;
 
         if (locale === 'american-to-british') {
@@ -21,10 +18,7 @@ class Translator {
                 let re3 = new RegExp(i + '\\b', 'ig'),
                     x = re3.exec(text);
 
-                if (x) {
-                    //console.log('testing translate func x is true ', x, re3.source);
-                    translated = translated.replace(re3, `${span1}${americanOnly[i]}${span2}`);
-                }
+                if (x) translated = translated.replace(re3, `${span1}${americanOnly[i]}${span2}`);
             }
 
             for (let i of Object.keys(americanToBritishSpelling)) {
@@ -93,7 +87,11 @@ class Translator {
 
         }
         
-        console.log('testing translate func translated ', translated);
+        //console.log('testing translate func translated ', translated);
+        if (translated == text) {
+            translated = 'Everything looks good to me!';
+        }
+
         return translated;
         
     }
