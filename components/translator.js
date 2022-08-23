@@ -16,21 +16,21 @@ class Translator {
 
             for (let i of Object.keys(americanOnly)) {
                 let re3 = new RegExp(i + '\\b', 'ig'),
-                    x = re3.exec(text);
+                    x = re3.exec(translated);
 
                 if (x) translated = translated.replace(re3, `${span1}${americanOnly[i]}${span2}`);
             }
 
             for (let i of Object.keys(americanToBritishSpelling)) {
                 let re3 = new RegExp(i + '\\b', 'ig'),
-                    x = re3.exec(text);                    
+                    x = re3.exec(translated);                    
                     
                 if (x) translated = translated.replace(re3, `${span1}${americanToBritishSpelling[i]}${span2}`);
             }
 
             for (let i of Object.keys(americanToBritishTitles)) {
                 let re3 = new RegExp(i.slice(0, -1) + '\\.', 'ig'),
-                    x = re3.exec(text),
+                    x = re3.exec(translated),
                     y = americanToBritishTitles[i].charAt(0).toUpperCase() + americanToBritishTitles[i].slice(1);
                 
                 //console.log('testing translate func titles re3.source ', re3.source, re3.flags);    
@@ -54,21 +54,21 @@ class Translator {
 
             for (let i of Object.keys(britishOnly)) {
                 let re3 = new RegExp(i + '\\b', 'ig'),
-                    x = re3.exec(text);
+                    x = re3.exec(translated);
                     
                 if (x) translated = translated.replace(re3, `${span1}${britishOnly[i]}${span2}`);
             }
 
             for (let i of Object.keys(americanToBritishSpelling)) {
                 let re3 = new RegExp(americanToBritishSpelling[i] + '\\b', 'ig'),
-                    x = re3.exec(text);
+                    x = re3.exec(translated);
                     
                 if (x) translated = translated.replace(re3, `${span1}${i}${span2}`);
             }
 
             for (let i of Object.keys(americanToBritishTitles)) {
                 let re3 = new RegExp(americanToBritishTitles[i] + '\\b', 'ig'),
-                    x = re3.exec(text),
+                    x = re3.exec(translated),
                     y = i.charAt(0).toUpperCase() + i.slice(1);
                     
                 if (x) translated = translated.replace(re3, `${span1}${y}${span2}`);
