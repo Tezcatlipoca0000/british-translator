@@ -17,7 +17,7 @@ class Translator {
         if (locale === 'american-to-british') {
 
             for (let i of Object.keys(americanOnly)) {
-                let re3 = new RegExp(i + '\\b', 'ig'), //TODO '^' + i + '\\W?$'
+                let re3 = new RegExp(i + '\\b', 'ig'),
                     x = re3.exec(text);
 
                 if (x) {
@@ -35,12 +35,12 @@ class Translator {
             }
 
             for (let i of Object.keys(americanToBritishTitles)) {
-                // i have to scape the dot
-                // mr\.\b gi
                 let re3 = new RegExp(i.slice(0, -1) + '\\.', 'ig'),
-                    x = re3.exec(text);
-                console.log('testing translate func titles re3.source ', re3.source, re3.flags);    
-                if (x) translated = translated.replace(re3, `${span1}${americanToBritishTitles[i]}${span2}`);
+                    x = re3.exec(text),
+                    y = americanToBritishTitles[i].charAt(0).toUpperCase() + americanToBritishTitles[i].slice(1);
+                
+                //console.log('testing translate func titles re3.source ', re3.source, re3.flags);    
+                if (x) translated = translated.replace(re3, `${span1}${y}${span2}`);
             }
 
         } 
@@ -63,9 +63,10 @@ class Translator {
 
             for (let i of Object.keys(americanToBritishTitles)) {
                 let re3 = new RegExp(americanToBritishTitles[i] + '\\b', 'ig'),
-                    x = re3.exec(text);
+                    x = re3.exec(text),
+                    y = i.charAt(0).toUpperCase() + i.slice(1);
                     
-                if (x) translated = translated.replace(re3, `${span1}${i}${span2}`);
+                if (x) translated = translated.replace(re3, `${span1}${y}${span2}`);
             }
 
         }
