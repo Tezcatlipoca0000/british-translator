@@ -11,8 +11,9 @@ class Translator {
         let translated = text,
             span1 = '<span class="highlight">',
             span2 = '</span>',
-            re1 = /\.|\?|!/; // TODO re1 to catch any punctuation 
+            //re1 = /\.|\?|!/; // TODO re1 to catch any punctuation 
             // TODO re2 to catch dd.dd | dd:dd
+            re2 = /\d\d:\d\d|\d\d\.\d\d/g;
 
         if (locale === 'american-to-british') {
 
@@ -24,7 +25,6 @@ class Translator {
                     //console.log('testing translate func x is true ', x, re3.source);
                     translated = translated.replace(re3, `${span1}${americanOnly[i]}${span2}`);
                 }
-
             }
 
             for (let i of Object.keys(americanToBritishSpelling)) {
@@ -41,6 +41,17 @@ class Translator {
                 
                 //console.log('testing translate func titles re3.source ', re3.source, re3.flags);    
                 if (x) translated = translated.replace(re3, `${span1}${y}${span2}`);
+            }
+
+            let x = re2.exec(translated);
+            if (x) {
+                let y = x[0],
+                    re3 = new RegExp(x[0], 'g');
+                
+                if (y.includes(':')) {
+                    y = y.replace(':', '.');
+                    translated = translated.replace(re3, `${span1}${y}${span2}`);
+                } 
             }
 
         } 
@@ -67,6 +78,17 @@ class Translator {
                     y = i.charAt(0).toUpperCase() + i.slice(1);
                     
                 if (x) translated = translated.replace(re3, `${span1}${y}${span2}`);
+            }
+
+            let x = re2.exec(translated);
+            if (x) {
+                let y = x[0],
+                    re3 = new RegExp(x[0], 'g');
+                
+                if (y.includes('.')) {
+                    y = y.replace('.', ':');
+                    translated = translated.replace(re3, `${span1}${y}${span2}`);
+                } 
             }
 
         }
