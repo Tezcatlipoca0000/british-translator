@@ -10,7 +10,7 @@ class Translator {
         let translated = text,
             span1 = '<span class="highlight">',
             span2 = '</span>',
-            re2 = /\d\d:\d\d|\d\d\.\d\d/g;
+            re2 = /\d?\d:\d\d|\d?\d\.\d\d/g;
 
         if (locale === 'american-to-british') {
 
@@ -36,7 +36,7 @@ class Translator {
                 //console.log('testing translate func titles re3.source ', re3.source, re3.flags);    
                 if (x) translated = translated.replace(re3, `${span1}${y}${span2}`);
             }
-
+            
             let x = re2.exec(translated);
             if (x) {
                 let y = x[0],
@@ -73,7 +73,7 @@ class Translator {
                     
                 if (x) translated = translated.replace(re3, `${span1}${y}${span2}`);
             }
-
+            
             let x = re2.exec(translated);
             if (x) {
                 let y = x[0],
@@ -84,7 +84,7 @@ class Translator {
                     translated = translated.replace(re3, `${span1}${y}${span2}`);
                 } 
             }
-
+            
         }
         
         //console.log('testing translate func translated ', translated);
